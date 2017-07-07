@@ -2,8 +2,24 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Login from './Login';
 
+const user = {
+	email: "user@mail.com",
+	password: "123",
+};
+
+const onSubmit = jest.fn();
+
+const changeInputValue = (input, value) => {
+	input.node.value = value;
+	input.simulate('change');
+};
+
+beforeEach(() => {
+	jest.clearAllMocks();
+})
+
 const mountComponent = () => {
-	const component = mount(<Login />);
+	const component = mount(<Login onSubmit={onSubmit}/>);
 
 	const form = component.find('form');
 	const inputs = {
@@ -41,9 +57,18 @@ describe('Login page', () => {
 		})
 	})
 
-	describe('Behaviour (Integration Test)', () => {
-		xit('calls the localStorage with correct token', () => {
-			
+	describe('Behaviour', () => {
+		const { form, inputs } = mountComponent();
+
+		beforeEach( async () => {
+			changeInputValue(inputs.email, user.email);
+			changeInputValue(inputs.password, user.password);
+		})
+
+		it('calls the onSubmit with correct values', () => {
+			form.simulate('submit');
+			expect(onSubmit).toHaveBeenCalledTimes(1);
+			expect(onSubmit).toHaveBeenCalledWith(user.email, user.password);
 		})
 	})
 })
