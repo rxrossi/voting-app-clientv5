@@ -1,6 +1,8 @@
+import { AUTH_SUCCESS } from '../actions/auth';
+
 export default (state = {}, action) => {
 	switch (action.type) {
-		case 'LOGIN_USER_RECEIVED':
+		case AUTH_SUCCESS:
 			return {
 				...state,
 				...action.user

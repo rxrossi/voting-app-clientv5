@@ -1,7 +1,7 @@
 import nock  from 'nock';
 
-import login   from './login.js';
-import config  from '../config';
+import { login } from './auth.js';
+import config    from '../config';
 
 import { createTestStore } from '../store';
 
