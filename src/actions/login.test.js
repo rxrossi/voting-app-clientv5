@@ -1,14 +1,9 @@
-import thunk from 'redux-thunk';
 import nock  from 'nock';
-
-import { createStore, applyMiddleware } from 'redux';
-import { FlushThunks }                  from 'redux-testkit';
 
 import login   from './login.js';
 import config  from '../config';
-import reducer from '../reducer';
 
-const flushThunks = FlushThunks.createMiddleware();
+import { createTestStore } from '../store';
 
 window.localStorage = {
 	setItem: jest.fn(),
@@ -20,20 +15,23 @@ const user = {
 	token: 'atok3n'
 }
 
-const store = createStore(reducer, applyMiddleware(flushThunks, thunk));
-
 describe('Login action ', () => {
-	describe('With Store', () => {
-		beforeEach( async () => {
-			nock(config.API_URL)
-				.post('/auth', {email: user.email, password: user.password})
-				.reply(200, {user, token: user.token})
+	beforeEach(() => {
+		nock(config.API_URL)
+			.post('/auth', {email: user.email, password: user.password})
+			.reply(200, {user, token: user.token})
 
-			jest.clearAllMocks();
+		jest.clearAllMocks();
+	})
+
+	describe('With Store', () => {
+
+		const { store, flushThunks } = createTestStore();
+
+		beforeEach( async () => {
 			store.dispatch(login(user.email, user.password));
 			await flushThunks.flush();
 		})
-
 
 		it('calls the localStorage.setItem with a token', () => {
 			//user should have user.token
