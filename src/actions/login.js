@@ -1,20 +1,13 @@
-import config from '../config';
-import request from 'superagent';
+import API from '../api';
 
-export const loginRoute = config.API_URL+'/auth';
+export default (email, password) => async dispatch => {
 
-export default (email, password) => dispatch => {
+	const user = await API.auth(email, password)
+	localStorage.setItem('user', user);
 
-	return request
-		.post(loginRoute)
-		.send({email, password})
-		.then(res => {
-			let { token, user } = res.body;
-			user = { ...user, token };
-			localStorage.setItem('user', user);
-		})
-		.catch(err => console.log(err.message))
-
-
-	// return false;
+	dispatch({
+		type: 'LOGIN_USER_RECEIVED',
+		user
+	})
 }
+

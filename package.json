@@ -7,13 +7,15 @@
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
     "superagent": "^3.5.2"
   },
   "devDependencies": {
     "enzyme": "^2.9.0",
     "nock": "^9.0.13",
     "react-scripts": "1.0.7",
-    "react-test-renderer": "^15.6.1"
+    "react-test-renderer": "^15.6.1",
+    "redux-testkit": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
