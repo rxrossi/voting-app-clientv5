@@ -24,7 +24,13 @@ describe('Login action ', () => {
 		jest.clearAllMocks();
 	})
 
-	describe('With Store', () => {
+	//TODO:
+	// - add with store on failure
+	// -- due incorrect credentials (check error code on server)
+	// -- another error (a server error)
+	// - add tests for states to check dispatch of requests, successes and failures
+
+	describe('With store on success', () => {
 
 		const { store, flushThunks } = createTestStore();
 

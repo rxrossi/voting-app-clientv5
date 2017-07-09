@@ -15,6 +15,8 @@ const auth = async (email, password) => {
 		.catch(err => console.log(err.message))
 };
 
+//TODO:
+// Plan to padronize awnsers with {err, res}, on success err should be undefined
 export default {
 	auth
 }

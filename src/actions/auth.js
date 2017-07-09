@@ -1,6 +1,8 @@
 import API from '../api';
 
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 const login = (email, password) => async dispatch => {
 	const user = await API.auth(email, password)
@@ -13,6 +15,15 @@ export {
 }
 
 const authSuccess = (user) => ({
-	type: AUTH_SUCCESS,
+	type: LOGIN_SUCCESS,
 	user
+});
+
+const authRequest = () => ({
+	type: LOGIN_REQUEST
+});
+
+const authFailure = (message) => ({
+	type: LOGIN_FAILURE,
+	message
 });
