@@ -33,15 +33,15 @@ describe('Login action ', () => {
 			await flushThunks.flush();
 		})
 
-		it('calls the localStorage.setItem with a token', () => {
+		it('calls the localStorage.setItem with user object', () => {
 			//user should have user.token
 			expect(localStorage.setItem).toHaveBeenCalledWith('user', user);
 		})
 
 		it('stores the user on redux store', () => {
-			expect(store.getState()).toEqual({
-				user
-			})
+			expect(store.getState()).toEqual(
+				{ user }
+			)
 		})
 	})
 })
