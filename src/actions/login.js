@@ -3,8 +3,7 @@ import request from 'superagent';
 
 export const loginRoute = config.API_URL+'/auth';
 
-export default (email, password) => {
-
+export default (email, password) => dispatch => {
 
 	return request
 		.post(loginRoute)

@@ -3,7 +3,7 @@ import nock from 'nock';
 import login from './login.js';
 import config from '../config';
 
-const loginReducer = (state = {}, action) => {
+const userReducer = (state = {}, action) => {
 	switch (action.type) {
 		default:
 			return state;
@@ -11,7 +11,7 @@ const loginReducer = (state = {}, action) => {
 }
 
 const reducer = combineReducers({
-	loginReducer
+	user: userReducer
 })
 
 window.localStorage = {
@@ -40,5 +40,11 @@ describe('login action', () => {
 	it('calls the localStorage.setItem with a token', () => {
 		//user should have user.token
 		expect(localStorage.setItem).toHaveBeenCalledWith('user', user);
+	})
+
+	it('stores the user on redux store', () => {
+		expect(store.getState()).toBe({
+			user
+		})
 	})
 })
