@@ -24,6 +24,10 @@ describe('Login action ', () => {
 		jest.clearAllMocks();
 	})
 
+	afterAll(() => {
+		nock.cleanAll();
+	})
+
 	//TODO:
 	// - add with store on failure
 	// -- due incorrect credentials (check error code on server)

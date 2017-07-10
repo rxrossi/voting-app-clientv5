@@ -5,7 +5,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 const login = (email, password) => async dispatch => {
-	const user = await API.auth(email, password)
+	const { user } = await API.auth(email, password)
 	localStorage.setItem('user', user);
 	dispatch(authSuccess(user));
 }
